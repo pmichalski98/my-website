@@ -1,0 +1,19 @@
+---
+import TitleLink from './LinkWithArrow.astro'
+import SocialLink from './SocialLink.astro'
+import Github from './svgs/Github.astro'
+
+interface Props {
+	title: string
+	liveLink: string
+	githubLink: string
+}
+const { title, liveLink, githubLink } = Astro.props
+---
+
+<div class="flex gap-2">
+	<TitleLink label={title} href={liveLink} />
+	<SocialLink href={githubLink}>
+		<Github />
+	</SocialLink>
+</div>

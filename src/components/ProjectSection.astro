@@ -1,0 +1,56 @@
+---
+import Badge from './Badge.astro'
+import ProjectHeader from './ProjectHeader.astro'
+import Hammer from './svgs/Hammer.astro'
+
+interface Props {
+	liveLink: string
+	githubLink: string
+	title: string
+	description: string
+	technologies: string[]
+	imageLink: string
+	isFinished?: boolean
+}
+
+const {
+	description,
+	isFinished = true,
+	githubLink,
+	imageLink,
+	liveLink,
+	technologies,
+	title
+} = Astro.props
+---
+
+<article>
+	<div class="group mt-4 space-y-4">
+		<div class="flex justify-between">
+			<ProjectHeader title={title} liveLink={liveLink} githubLink={githubLink} />
+			{
+				!isFinished && (
+					<div class="flex items-center gap-1 text-rose-400">
+						Project is still under development <Hammer />
+					</div>
+				)
+			}
+		</div>
+		<p>{description}</p>
+		<div class="flex flex-wrap gap-2 py-2">
+			{technologies.map((tech) => <Badge>{tech}</Badge>)}
+		</div>
+		<div class="w-fit">
+			<a href={liveLink}>
+				<img
+					src={imageLink}
+					width="200"
+					height="50"
+					loading="lazy"
+					class="mt-4 rounded border-2 border-slate-200/10 object-cover transition group-hover:border-slate-200/30"
+					alt="project image"
+				/>
+			</a>
+		</div>
+	</div>
+</article>
